@@ -1,8 +1,15 @@
+require('dotenv').config();
 const express = require('express');
-const handle = require('./handlers/server');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const handle = require('./handlers');
 
 const app = express();
-const port = 4040;
+const port = process.env.PORT;
+
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.json({servStat: 'Server status'}));
 
