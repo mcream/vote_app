@@ -1,8 +1,12 @@
 const express = require('express');
+const handle = require('./handlers/server');
 
 const app = express();
 const port = 4040;
 
-app.get('/', (req, res) => res.send('hello world'));
+app.get('/', (req, res) => res.json({servStat: 'Server status'}));
 
-app.listen(port, console.log(`Server is turned on ${port} port`));
+app.use(handle.notFound);
+app.use(handle.errors);
+
+app.listen(port, console.log(`Server working on port ${port}`));
